@@ -1,9 +1,22 @@
 .calculator{
   width:300px;
   margin: 0 auto;
-  border: 10px solid black;
-  border-radius: 15px;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 .display{
+  font-size: 50px;
+  text-align: right;
+}
+.buttons{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+button{
   font-size: 30px;
+  border-radius: 50px;
+}
+.wide-button{
+  border-radius: 500px;
 }
