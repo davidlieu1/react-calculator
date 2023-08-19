@@ -107,29 +107,31 @@ function App() {
     }
   };
   return (
-    <div className="calculator"> 
-      <div className="display">{display}</div>
-      <div className="buttons">
-       
-        <button className='button-another' onClick={() => handleClear()}>C</button>
-        <button className='button-another' onClick={() => handleVar('-1')}>+/-</button>
-        <button className='button-another' onClick={() => handleVar('.01')}>%</button>
-        <button className='button-operation' onClick={() => handleOperation('/')}>/</button>
-        <button onClick={() => handleVar('7')}>7</button>
-        <button onClick={() => handleVar('8')}>8</button>
-        <button onClick={() => handleVar('9')}>9</button>
-        <button className='button-operation' onClick={() => handleOperation('+')}>+</button>
-        <button onClick={() => handleVar('4')}>4</button>
-        <button onClick={() => handleVar('5')}>5</button>
-        <button onClick={() => handleVar('6')}>6</button>
-        <button className='button-operation' onClick={() => handleOperation('-')}>-</button>
-        <button onClick={() => handleVar('1')}>1</button>
-        <button onClick={() => handleVar('2')}>2</button>
-        <button onClick={() => handleVar('3')}>3</button>
-        <button className='button-operation' onClick={() => handleOperation('*')}>*</button>
-        <button className='big' onClick={() => handleVar('0')}>0</button>
-        <button onClick={() => handleVar('.')}>.</button>
-        <button className='button-operation' onClick={() => handleEval()}>=</button>
+    <div className='calculator-container'>
+      <div className="calculator"> 
+        <div className="display">{display}</div>
+        <div className="buttons">
+        
+          <button className='button-another' onClick={() => handleClear()}>C</button>
+          <button className='button-another' onClick={() => handleVar('-1')}>+/-</button>
+          <button className='button-another' onClick={() => handleVar('.01')}>%</button>
+          <button className='button-operation' onClick={() => handleOperation('/')}>/</button>
+          <button onClick={() => handleVar('7')}>7</button>
+          <button onClick={() => handleVar('8')}>8</button>
+          <button onClick={() => handleVar('9')}>9</button>
+          <button className='button-operation' onClick={() => handleOperation('+')}>+</button>
+          <button onClick={() => handleVar('4')}>4</button>
+          <button onClick={() => handleVar('5')}>5</button>
+          <button onClick={() => handleVar('6')}>6</button>
+          <button className='button-operation' onClick={() => handleOperation('-')}>-</button>
+          <button onClick={() => handleVar('1')}>1</button>
+          <button onClick={() => handleVar('2')}>2</button>
+          <button onClick={() => handleVar('3')}>3</button>
+          <button className='button-operation' onClick={() => handleOperation('*')}>x</button>
+          <button className='big' onClick={() => handleVar('0')}>0</button>
+          <button onClick={() => handleVar('.')}>.</button>
+          <button className='button-operation' onClick={() => handleEval()}>=</button>
+        </div>
       </div>
     </div>
   );

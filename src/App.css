@@ -1,4 +1,9 @@
 /* App.css */
+.calculator-container{
+  display: grid;
+  place-items: center;
+  height: 100vh;
+}
 .calculator {
   width: 320px;
   margin: 0 auto;
