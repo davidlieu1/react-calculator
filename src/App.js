@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-
+import ValueDisplay from './ValueDisplay.js';
 
 function App() {
   /*/
@@ -24,16 +24,9 @@ function App() {
     then decides which variable(var1/var2) will be modified
   /*/
   const handleVar = (value) =>{
-    if(after1 && (value == '-1' || value == '.1' || value == '.')){
-      handleNum(value, var1, setVar1, after1);
-    }
-    if(after1){
-      setVar1('0');
-    }
-    if(after2){
-      setVar2('0');
-    }
-    if(useAns){
+    if(after1 && (value === '-1' || value === '.01')){
+      handleNum(value, var1, setVar1, false);
+    }else if(useAns){
       handleNum(value, var1, setVar1, after1);
       setAfter1(false);
     }else{
@@ -48,36 +41,53 @@ function App() {
     slate(bool) indicates whether or not to clear the variable before appending.
   /*/
   const handleNum = (value, variable, setVariable, slate) => {
-    if(value === '-1' || value === '.01'){
-      let ans = eval(variable+'*'+value).toString();
+    let currVal = variable;
+    if(slate){
+      currVal = '0';
+    }
+    if(value === '.01'){
+      let ans = eval(currVal+'*'+value).toString();
       setVariable(ans);
       setDisplay(ans);
     }
     else if(value == '.'){
       let decimal = false;
-      for(let i = 0; i < variable.length; i++){
-        if(variable[i] == '.'){
+      for(let i = 0; i < currVal.length; i++){
+        if(currVal[i] == '.'){
           decimal = true;
         }
       }
       if(!decimal){
-        setVariable(variable+'.')
-        setDisplay(variable+'.')
+        let ans = currVal+'.';
+        setVariable(ans);
+        setDisplay(ans);
       }
-    }else if(variable === '0' || display === 'Error' || slate){
+    }else if(value === '-1'){
+      if(currVal[0] === '-'){
+        let ans = currVal.slice(1);
+        setVariable(ans);
+        setDisplay(ans);
+      }else{
+        let ans = '-'+currVal;
+        setVariable(ans);
+        setDisplay(ans);
+      }
+    }else if(currVal === '0' || display === 'Error' || slate){
       setVariable(value);
       setDisplay(value);
+    }else if(currVal === '-0'){
+      let ans = '-'+value;
+      setVariable(ans);
+      setDisplay(ans);
     }else{
-      setVariable(variable+value);
-      setDisplay(variable+value);
+      let ans = currVal+value;
+      setVariable(ans);
+      setDisplay(ans);
     }
   };
   const handleOperation = (value) => {
-    if(useAns){
-      setVar2(var1);
-      setAns(false);
-      setAfter1(false);
-    }
+    setAns(false);
+    setAfter1(false);
     setOperation(value);
   }
   /*/
@@ -87,6 +97,10 @@ function App() {
     setDisplay('0');
     setVar1('0');
     setVar2('0');
+    setAns(true);
+    setAfter1(true);
+    setAfter2(true);
+    setOperation('');
   };
   /*/
     evaluates expression given var1 operation var2
@@ -109,7 +123,7 @@ function App() {
   return (
     <div className='calculator-container'>
       <div className="calculator"> 
-        <div className="display">{display}</div>
+        <ValueDisplay value = {display}/>
         <div className="buttons">
         
           <button className='button-another' onClick={() => handleClear()}>C</button>
@@ -119,7 +133,7 @@ function App() {
           <button onClick={() => handleVar('7')}>7</button>
           <button onClick={() => handleVar('8')}>8</button>
           <button onClick={() => handleVar('9')}>9</button>
-          <button className='button-operation' onClick={() => handleOperation('+')}>+</button>
+          <button className='button-operation' onClick={() => handleOperation('*')}>x</button>
           <button onClick={() => handleVar('4')}>4</button>
           <button onClick={() => handleVar('5')}>5</button>
           <button onClick={() => handleVar('6')}>6</button>
@@ -127,7 +141,7 @@ function App() {
           <button onClick={() => handleVar('1')}>1</button>
           <button onClick={() => handleVar('2')}>2</button>
           <button onClick={() => handleVar('3')}>3</button>
-          <button className='button-operation' onClick={() => handleOperation('*')}>x</button>
+          <button className='button-operation' onClick={() => handleOperation('+')}>+</button>
           <button className='big' onClick={() => handleVar('0')}>0</button>
           <button onClick={() => handleVar('.')}>.</button>
           <button className='button-operation' onClick={() => handleEval()}>=</button>
